@@ -46,7 +46,7 @@ export function Footer() {
           <p>
             Nettside levert av{" "}
             <a
-              href="https://pahstudio.no"
+              href="https://studiopah.no/"
               target="_blank"
               rel="noopener noreferrer"
               className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
