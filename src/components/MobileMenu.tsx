@@ -56,17 +56,20 @@ export function MobileMenu() {
         >
           <nav aria-label="Mobilnavigasjon" className="px-5 py-4">
             <ul className="flex flex-col">
-              {navItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.to}
-                    hash={item.hash}
-                    className="flex min-h-12 items-center border-b border-border/60 text-[0.95rem] font-medium text-brown-deep last:border-0"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
+              {navItems.map((item) => {
+                const hash = "hash" in item ? item.hash : undefined;
+                return (
+                  <li key={item.label}>
+                    <Link
+                      to={item.to}
+                      {...(hash ? { hash } : {})}
+                      className="flex min-h-12 items-center border-b border-border/60 text-[0.95rem] font-medium text-brown-deep last:border-0"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
               <li className="pt-4 pb-2">
                 <Link to="/" hash="kontakt" className="btn btn-primary w-full">
                   Kontakt

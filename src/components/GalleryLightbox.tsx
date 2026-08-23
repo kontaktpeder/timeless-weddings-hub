@@ -40,6 +40,8 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
     };
   }, [onClose, prev, next]);
 
+  if (!image) return null;
+
   return (
     <div
       role="dialog"

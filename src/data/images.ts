@@ -53,17 +53,14 @@ function toImages(
   width: number,
   height: number,
 ): GalleryImage[] {
-  return Object.keys(modules)
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((path) => {
-      const key = basename(path);
-      return {
-        src: modules[path],
-        alt: altText[key] ?? "Bryllupsbilde fotografert av Simon Myklebost",
-        width,
-        height,
-      };
-    });
+  return Object.entries(modules)
+    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .map(([path, src]) => ({
+      src,
+      alt: altText[basename(path)] ?? "Bryllupsbilde fotografert av Simon Myklebost",
+      width,
+      height,
+    }));
 }
 
 /** Vertikale bilder til den kontinuerlige karusellen (832×1248). */
