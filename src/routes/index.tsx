@@ -1,24 +1,67 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "../components/Hero";
+import { TrustIntro } from "../components/TrustIntro";
+import { AboutSimon } from "../components/AboutSimon";
+import { InfiniteImageCarousel } from "../components/InfiniteImageCarousel";
+import { PackageSection } from "../components/PackageSection";
+import { Testimonials } from "../components/Testimonials";
+import { VimeoVideo } from "../components/VimeoVideo";
+import { ContactCTA } from "../components/ContactCTA";
+import { site } from "../data/site";
+import heroImage from "../assets/images/hero/hero.jpg";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const description =
+  "Jordnær og profesjonell bryllupsfotografering på Sørlandet og i Oslo. Heldagsfotografering med minimum 400 bilder fra Simon Myklebost.";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Simon Myklebost",
+  description,
+  url: `${site.domain}/`,
+  email: site.email,
+  telephone: "+4794160142",
+  areaServed: [
+    { "@type": "Place", name: "Sørlandet" },
+    { "@type": "City", name: "Kristiansand" },
+    { "@type": "City", name: "Oslo" },
+  ],
+  sameAs: [site.instagram],
+};
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Simon Myklebost | Bryllupsfotograf på Sørlandet og i Oslo" },
+      { name: "description", content: description },
+      { property: "og:title", content: "Simon Myklebost | Bryllupsfotograf på Sørlandet og i Oslo" },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: `${site.domain}/` },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: `${site.domain}/` },
+      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
+    ],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(jsonLd) },
+    ],
+  }),
+  component: LandingPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function LandingPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <TrustIntro />
+      <AboutSimon />
+      <InfiniteImageCarousel />
+      <PackageSection />
+      <Testimonials />
+      <VimeoVideo />
+      <ContactCTA />
+    </>
   );
 }
