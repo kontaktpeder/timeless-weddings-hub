@@ -53,17 +53,14 @@ function toImages(
   width: number,
   height: number,
 ): GalleryImage[] {
-  return Object.keys(modules)
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-    .map((path) => {
-      const key = basename(path);
-      return {
-        src: modules[path],
-        alt: altText[key] ?? "Bryllupsbilde fotografert av Simon Myklebost",
-        width,
-        height,
-      };
-    });
+  return Object.entries(modules)
+    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+    .map(([path, src]) => ({
+      src,
+      alt: altText[basename(path)] ?? "Bryllupsbilde fotografert av Simon Myklebost",
+      width,
+      height,
+    }));
 }
 
 /** Vertikale bilder til den kontinuerlige karusellen (832×1248). */
@@ -73,6 +70,22 @@ const galleryOnly = toImages(galleryModules, 1248, 832);
 
 /**
  * Det samlede galleriet på /galleri — alle utvalgte bilder,
- * vertikale og horisontale, uten gruppering per bryllup.
+ * vertikale og horisontale flettet sammen for et organisk
+ * masonry-uttrykk, uten gruppering per bryllup.
  */
-export const galleryImages: GalleryImage[] = [...carouselImages, ...galleryOnly];
+export const galleryImages: GalleryImage[] = (() => {
+  const vertical = [...carouselImages];
+  const horizontal = [...galleryOnly];
+  const merged: GalleryImage[] = [];
+  const max = Math.max(vertical.length, horizontal.length);
+  for (let i = 0; i < max; i++) {
+    // To vertikale per horisontale gir jevn fordeling i kolonnene
+    const v1 = vertical[i * 2];
+    const v2 = vertical[i * 2 + 1];
+    const h = horizontal[i];
+    if (v1) merged.push(v1);
+    if (v2) merged.push(v2);
+    if (h) merged.push(h);
+  }
+  return merged;
+})();

@@ -16,18 +16,21 @@ export function Header() {
         </Link>
 
         <nav aria-label="Hovednavigasjon" className="hidden items-center gap-7 md:flex">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              to={item.to}
-              hash={item.hash}
-              activeOptions={item.hash ? { includeHash: false } : undefined}
-              className="text-[0.85rem] font-medium tracking-wide text-brown-deep/75 transition-colors hover:text-brown-deep"
-              activeProps={{ className: "text-brown-deep underline underline-offset-8 decoration-clay decoration-1" }}
-            >
-              {item.label}
-            </Link>
-          ))}
+          {navItems.map((item) => {
+            const hash = "hash" in item ? item.hash : undefined;
+            return (
+              <Link
+                key={item.label}
+                to={item.to}
+                {...(hash ? { hash } : {})}
+                activeOptions={{ includeHash: false }}
+                className="text-[0.85rem] font-medium tracking-wide text-brown-deep/75 transition-colors hover:text-brown-deep"
+                activeProps={{ className: "text-brown-deep underline underline-offset-8 decoration-clay decoration-1" }}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <Link to="/" hash="kontakt" className="btn btn-primary !min-h-10 px-5 py-2 text-[0.85rem]">
             Kontakt
           </Link>
