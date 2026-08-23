@@ -1,18 +1,18 @@
 {
-  "sourceFilename": "Simon_Myklebost-171.jpg",
-  "alt": "Brudepar kysser på en landevei omgitt av sommereng og skog",
+  "sourceFilename": "001-brudepar-gar-hand-i-hand-pa-en-landvei.webp",
+  "alt": "Brudepar går hånd i hånd på en landevei omgitt av sommereng",
   "files": [
     {
-      "src": "/images/hero/simon-myklebost-hero-1280.webp",
+      "src": "/images/hero/simon-myklebost-hero-landevei-1280.webp",
       "width": 1280,
-      "height": 854,
-      "bytes": 179768
+      "height": 853,
+      "bytes": 167436
     },
     {
-      "src": "/images/hero/simon-myklebost-hero-1920.webp",
+      "src": "/images/hero/simon-myklebost-hero-landevei-1920.webp",
       "width": 1920,
       "height": 1280,
-      "bytes": 327382
+      "bytes": 303774
     }
   ]
 }
