@@ -34,9 +34,9 @@ export function Hero() {
           />
 
           {/* Innhold lagt over bildet */}
-          <div className="relative z-10 flex h-full flex-col px-5 py-7 md:px-10 md:py-10 lg:px-14 lg:py-12">
-            {/* Desktop: tittel venstre, undertekst høyre */}
-            <div className="hidden flex-col gap-6 md:flex md:flex-row md:items-start md:justify-between">
+          <div className="relative z-10 flex h-full flex-col justify-end px-5 py-7 md:px-10 md:py-10 lg:px-14 lg:py-12">
+            {/* Desktop: tittel nede venstre, undertekst nede høyre */}
+            <div className="hidden flex-col gap-6 md:flex md:flex-row md:items-end md:justify-between">
               <div className="max-w-xl">
                 <p className="overline-label text-on-dark/80">
                   Bryllupsfotograf på Sørlandet og i Oslo
@@ -46,7 +46,7 @@ export function Hero() {
                 </h1>
               </div>
 
-              <p className="max-w-xs text-base leading-relaxed text-on-dark/90 md:text-right md:text-lg drop-shadow-soft">
+              <p className="max-w-xs pb-1 text-base leading-relaxed text-on-dark/90 md:text-right md:text-lg drop-shadow-soft">
                 Bryllupsbilder med ro, varme og full kontroll – så dere kan være
                 til stede i dagen.
               </p>
@@ -58,52 +58,6 @@ export function Hero() {
                 {site.name}
               </h1>
             </div>
-
-            {/* Desktop: linker i bunn */}
-            <nav aria-label="Hovednavigasjon" className="hidden md:block">
-              <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem] font-medium tracking-wide text-on-dark/80">
-                <li>
-                  <Link
-                    to="/galleri"
-                    className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
-                  >
-                    Galleri
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="#om-simon"
-                    className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
-                  >
-                    Om Simon
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#heldag"
-                    className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
-                  >
-                    Heldag
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#tilbakemeldinger"
-                    className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
-                  >
-                    Tilbakemeldinger
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#kontakt"
-                    className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
-                  >
-                    Kontakt
-                  </a>
-                </li>
-              </ul>
-            </nav>
 
             {/* Mobil: overline i bunn */}
             <p className="mt-auto text-center text-xs font-medium uppercase tracking-[0.18em] text-on-dark/80 md:hidden">
