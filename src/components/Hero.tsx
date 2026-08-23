@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { site } from "../data/site";
-import heroAsset from "../assets/images/hero/hero.jpg.asset.json";
+import heroImage from "../assets/images/hero/hero.jpg";
 
 export function Hero() {
   return (
@@ -10,7 +10,7 @@ export function Hero() {
         <div className="relative h-full w-full overflow-hidden rounded-3xl bg-brown-deep/15 shadow-warm">
           {/* Bakgrunnsbilde */}
           <img
-            src={heroAsset.url}
+            src={heroImage}
             alt="Brudepar kysser på en landevei omgitt av sommereng og skog"
             width={1600}
             height={1067}
