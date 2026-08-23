@@ -13,6 +13,20 @@ export function TrustIntro() {
           hele dagen sørger jeg for at dere kan senke skuldrene og være fullt
           til stede – mens jeg tar vare på historien deres.
         </p>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[0.85rem] font-medium tracking-wide text-brown-deep/75">
+          <a
+            href="#tilbakemeldinger"
+            className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline"
+          >
+            Tilbakemeldinger
+          </a>
+          <a
+            href="#kontakt"
+            className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline"
+          >
+            Kontakt
+          </a>
+        </div>
         <hr className="rule mx-auto mt-10 w-16" />
       </div>
     </section>
