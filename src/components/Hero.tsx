@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { site } from "../data/site";
-import heroImage from "../assets/images/hero/hero.jpg";
+import { heroImage, smallestVariant, srcSet } from "../data/images";
 
 export function Hero() {
+  const heroSrc = smallestVariant(heroImage.files);
+
   return (
     <section className="relative">
       {/* Ytre ramme: luft mot kantene på store skjermer, avrundet bilde innerst */}
@@ -10,10 +12,12 @@ export function Hero() {
         <div className="relative h-full w-full overflow-hidden rounded-3xl bg-brown-deep/15 shadow-warm">
           {/* Bakgrunnsbilde */}
           <img
-            src={heroImage}
-            alt="Brudepar kysser på en landevei omgitt av sommereng og skog"
-            width={1600}
-            height={1067}
+            src={heroSrc.src}
+            alt={heroImage.alt}
+            width={heroSrc.width}
+            height={heroSrc.height}
+            srcSet={srcSet(heroImage.files)}
+            sizes="100vw"
             fetchPriority="high"
             decoding="async"
             className="absolute inset-0 h-full w-full object-cover"
