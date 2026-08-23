@@ -41,8 +41,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-on-dark/15">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-6 text-xs text-on-dark/50 md:flex-row md:items-center md:justify-between md:px-8">
-          <p>© {new Date().getFullYear()} studioPAH</p>
+        <div className="mx-auto flex max-w-6xl items-center justify-center px-5 py-6 text-xs text-on-dark/50 md:px-8">
           <p>
             Nettside levert av{" "}
             <a
