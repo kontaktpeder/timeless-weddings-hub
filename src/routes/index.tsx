@@ -8,7 +8,7 @@ import { Testimonials } from "../components/Testimonials";
 import { VimeoVideo } from "../components/VimeoVideo";
 import { ContactCTA } from "../components/ContactCTA";
 import { site } from "../data/site";
-import heroImage from "../assets/images/hero/hero.jpg";
+import heroAsset from "../assets/images/hero/hero.jpg.asset.json";
 
 const description =
   "Jordnær og profesjonell bryllupsfotografering på Sørlandet og i Oslo. Heldagsfotografering med minimum 400 bilder fra Simon Myklebost.";
@@ -42,7 +42,7 @@ export const Route = createFileRoute("/")({
     ],
     links: [
       { rel: "canonical", href: `${site.domain}/` },
-      { rel: "preload", as: "image", href: heroImage, fetchPriority: "high" },
+      { rel: "preload", as: "image", href: heroAsset.url, fetchPriority: "high" },
     ],
     scripts: [
       { type: "application/ld+json", children: JSON.stringify(jsonLd) },
