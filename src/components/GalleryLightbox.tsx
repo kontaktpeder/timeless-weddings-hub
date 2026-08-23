@@ -11,19 +11,33 @@ interface GalleryLightboxProps {
 /**
  * Enkel, rask og tastaturvennlig fullskjermvisning.
  * Escape lukker, piltaster blar, klikk på mørk bakgrunn lukker.
+ * Laster bare gjeldende full-fil og nærmeste naboer.
  */
 export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryLightboxProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const image = images[index];
+  const prevIndex = (index - 1 + images.length) % images.length;
+  const nextIndex = (index + 1) % images.length;
+  const prevImage = images[prevIndex];
+  const nextImage = images[nextIndex];
 
   const prev = useCallback(
-    () => onNavigate((index - 1 + images.length) % images.length),
-    [index, images.length, onNavigate],
+    () => onNavigate(prevIndex),
+    [onNavigate, prevIndex],
   );
   const next = useCallback(
-    () => onNavigate((index + 1) % images.length),
-    [index, images.length, onNavigate],
+    () => onNavigate(nextIndex),
+    [onNavigate, nextIndex],
   );
+
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -32,15 +46,10 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
       if (e.key === "ArrowRight") next();
     };
     document.addEventListener("keydown", onKeyDown);
-    document.body.style.overflow = "hidden";
-    closeRef.current?.focus();
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
-    };
+    return () => document.removeEventListener("keydown", onKeyDown);
   }, [onClose, prev, next]);
 
-  if (!image) return null;
+  if (!image || !prevImage || !nextImage) return null;
 
   return (
     <div
@@ -75,10 +84,10 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
 
       <figure className="max-h-full max-w-full" onClick={(e) => e.stopPropagation()}>
         <img
-          src={image.src}
+          src={image.full}
           alt={image.alt}
-          width={image.width}
-          height={image.height}
+          width={image.fullWidth}
+          height={image.fullHeight}
           decoding="async"
           className="max-h-[78vh] w-auto max-w-full rounded-md object-contain"
         />
@@ -86,6 +95,9 @@ export function GalleryLightbox({ images, index, onClose, onNavigate }: GalleryL
           {index + 1} / {images.length}
         </figcaption>
       </figure>
+
+      <img src={prevImage.full} alt="" hidden width={1} height={1} />
+      <img src={nextImage.full} alt="" hidden width={1} height={1} />
 
       <button
         type="button"

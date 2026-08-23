@@ -1,91 +1,68 @@
 /**
  * Bildehåndtering.
  *
- * Alle bilder hentes automatisk fra lokale mapper via import.meta.glob.
- * Legg nye bilder i src/assets/images/gallery/ (og eventuelt carousel/)
- * — de plukkes opp uten endringer i koden.
- *
- * Alternativ tekst og rekkefølge styres fra filnavnet: prefiks med tall
- * (01-, 02-, ...) og legg inn en alt-tekst i altText nedenfor.
- * Faller tilbake til en generisk tekst om filnavnet mangler oppføring.
+ * Manifestene i denne mappen er eneste kilde for stier, rekkefølge,
+ * størrelser og alternativ tekst. Bildene ligger som statiske WebP-filer
+ * under public/images og lastes via URL, ikke via bundelen.
  */
-export interface GalleryImage {
+import heroJson from "./hero.json";
+import carouselManifest from "./carousel-manifest.json";
+import galleryManifest from "./gallery-manifest.json";
+
+export interface ImageVariant {
   src: string;
-  alt: string;
   width: number;
   height: number;
+  bytes: number;
 }
 
-const carouselModules = import.meta.glob("../assets/images/carousel/*.jpg", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
-
-const galleryModules = import.meta.glob("../assets/images/gallery/*.jpg", {
-  eager: true,
-  query: "?url",
-  import: "default",
-}) as Record<string, string>;
-
-/** Alt-tekster per filnavn (uten filendelse). */
-const altText: Record<string, string> = {
-  "01-bride-laughing": "Brud som ler med buketten sin i varmt vinduslys",
-  "02-couple-walking": "Brudepar som går hånd i hånd langs en grusvei i solnedgang",
-  "03-ceremony": "Rørt brudgom under vielsen i en hvit trekirke",
-  "04-rings": "Nærbilde av hender som bytter vielsesringer i stearinlys",
-  "05-first-dance": "Brudeparets første dans under varme lyslenker",
-  "06-bouquet": "Brudebukett med kremfargede roser mot blondekjole",
-  "07-groom": "Brudgom som retter på slipset i mykt morgenlys",
-  "08-veil-laughter": "Brudepar som ler sammen under sløret i kystlandskapet",
-  "09-toast": "Bryllupsgjester som skåler ved langbord i kveldslys",
-  "10-landscape-kiss": "Brudepar som kysser i et vidt norsk fjordlandskap",
-  "11-table-setting": "Dekket festbord med stearinlys og ville blomster",
-  "12-confetti": "Nygift par i konfettiregn utenfor en hvit trekirke",
-};
-
-function basename(path: string): string {
-  return path.split("/").pop()?.replace(/\.[^.]+$/, "") ?? path;
+export interface HeroImage {
+  sourceFilename: string;
+  alt: string;
+  files: ImageVariant[];
 }
 
-function toImages(
-  modules: Record<string, string>,
-  width: number,
-  height: number,
-): GalleryImage[] {
-  return Object.entries(modules)
-    .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
-    .map(([path, src]) => ({
-      src,
-      alt: altText[basename(path)] ?? "Bryllupsbilde fotografert av Simon Myklebost",
-      width,
-      height,
-    }));
+export interface CarouselImage {
+  order: number;
+  sourceFilename: string;
+  alt: string;
+  variants: ImageVariant[];
+  href: "/galleri";
 }
 
-/** Vertikale bilder til den kontinuerlige karusellen (832×1248). */
-export const carouselImages: GalleryImage[] = toImages(carouselModules, 832, 1248);
+export interface GalleryImage {
+  order: number;
+  sourceFilename: string;
+  category: string;
+  cluster: string;
+  alt: string;
+  orientation: "horizontal" | "vertical";
+  thumb: string;
+  full: string;
+  thumbWidth: number;
+  thumbHeight: number;
+  fullWidth: number;
+  fullHeight: number;
+  thumbBytes: number;
+  fullBytes: number;
+}
 
-const galleryOnly = toImages(galleryModules, 1248, 832);
+export const heroImage = heroJson as HeroImage;
 
-/**
- * Det samlede galleriet på /galleri — alle utvalgte bilder,
- * vertikale og horisontale flettet sammen for et organisk
- * masonry-uttrykk, uten gruppering per bryllup.
- */
-export const galleryImages: GalleryImage[] = (() => {
-  const vertical = [...carouselImages];
-  const horizontal = [...galleryOnly];
-  const merged: GalleryImage[] = [];
-  const max = Math.max(vertical.length, horizontal.length);
-  for (let i = 0; i < max; i++) {
-    // To vertikale per horisontale gir jevn fordeling i kolonnene
-    const v1 = vertical[i * 2];
-    const v2 = vertical[i * 2 + 1];
-    const h = horizontal[i];
-    if (v1) merged.push(v1);
-    if (v2) merged.push(v2);
-    if (h) merged.push(h);
-  }
-  return merged;
-})();
+export const carouselImages: CarouselImage[] = (
+  carouselManifest as CarouselImage[]
+).slice().sort((a, b) => a.order - b.order);
+
+export const galleryImages: GalleryImage[] = (
+  galleryManifest as GalleryImage[]
+).slice().sort((a, b) => a.order - b.order);
+
+export function smallestVariant(variants: ImageVariant[]): ImageVariant {
+  return variants.reduce((best, variant) =>
+    variant.width < best.width ? variant : best,
+  );
+}
+
+export function srcSet(variants: ImageVariant[]): string {
+  return variants.map((variant) => `${variant.src} ${variant.width}w`).join(", ");
+}

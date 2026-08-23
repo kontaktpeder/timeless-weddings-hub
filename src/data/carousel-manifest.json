@@ -1,0 +1,202 @@
+[
+  {
+    "order": 1,
+    "sourceFilename": "Simon_Myklebost-8.jpg",
+    "alt": "Brud ser seg i speilet under forberedelsene.",
+    "variants": [
+      {
+        "src": "/images/carousel/01-brud-forberedelser-960.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 15696
+      },
+      {
+        "src": "/images/carousel/01-brud-forberedelser-1440.webp",
+        "width": 1152,
+        "height": 1440,
+        "bytes": 32498
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 2,
+    "sourceFilename": "Simon_Myklebost-27.jpg",
+    "alt": "Rørt brudgom tørker en tåre under vielsen.",
+    "variants": [
+      {
+        "src": "/images/carousel/02-roert-brudgom-960.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 32466
+      },
+      {
+        "src": "/images/carousel/02-roert-brudgom-1440.webp",
+        "width": 1152,
+        "height": 1440,
+        "bytes": 144226
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 3,
+    "sourceFilename": "Simon_Myklebost-42.jpg",
+    "alt": "Brud med blomsterbukett under vielsen.",
+    "variants": [
+      {
+        "src": "/images/carousel/03-brud-under-vielse-960.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 31702
+      },
+      {
+        "src": "/images/carousel/03-brud-under-vielse-1440.webp",
+        "width": 1152,
+        "height": 1440,
+        "bytes": 69638
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 4,
+    "sourceFilename": "Simon_Myklebost-63.jpg",
+    "alt": "Nygifte går smilende ned kirkegulvet.",
+    "variants": [
+      {
+        "src": "/images/carousel/04-utgang-fra-kirken-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 39940
+      },
+      {
+        "src": "/images/carousel/04-utgang-fra-kirken-1440.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 83028
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 5,
+    "sourceFilename": "Simon_Myklebost-91.jpg",
+    "alt": "Nygifte møter gjestene og såpebobler utenfor kirken.",
+    "variants": [
+      {
+        "src": "/images/carousel/05-kirketrapp-og-saapebobler-960.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 108086
+      },
+      {
+        "src": "/images/carousel/05-kirketrapp-og-saapebobler-1440.webp",
+        "width": 1152,
+        "height": 1440,
+        "bytes": 262062
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 6,
+    "sourceFilename": "Simon_Myklebost-133.jpg",
+    "alt": "Smilende brud sitter i en rød veteranbil.",
+    "variants": [
+      {
+        "src": "/images/carousel/06-roed-veteranbil-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 46466
+      },
+      {
+        "src": "/images/carousel/06-roed-veteranbil-1440.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 95084
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 7,
+    "sourceFilename": "Simon_Myklebost-159.jpg",
+    "alt": "Brudepar kysser under brudens slør.",
+    "variants": [
+      {
+        "src": "/images/carousel/07-kyss-under-sloeret-960.webp",
+        "width": 768,
+        "height": 960,
+        "bytes": 131004
+      },
+      {
+        "src": "/images/carousel/07-kyss-under-sloeret-1440.webp",
+        "width": 1152,
+        "height": 1440,
+        "bytes": 374950
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 8,
+    "sourceFilename": "Simon_Myklebost-176.jpg",
+    "alt": "Brudepar går ved gamle steinruiner i landskapet.",
+    "variants": [
+      {
+        "src": "/images/carousel/08-portrett-ved-ruiner-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 89278
+      },
+      {
+        "src": "/images/carousel/08-portrett-ved-ruiner-1440.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 211364
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 9,
+    "sourceFilename": "Simon_Myklebost-231.jpg",
+    "alt": "Brudgommen løfter bruden i et lekent portrett.",
+    "variants": [
+      {
+        "src": "/images/carousel/09-leken-portrettserie-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 114232
+      },
+      {
+        "src": "/images/carousel/09-leken-portrettserie-1440.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 258598
+      }
+    ],
+    "href": "/galleri"
+  },
+  {
+    "order": 10,
+    "sourceFilename": "Simon_Myklebost-434.jpg",
+    "alt": "Brud danser energisk under bryllupsfesten.",
+    "variants": [
+      {
+        "src": "/images/carousel/10-dansegulv-960.webp",
+        "width": 640,
+        "height": 960,
+        "bytes": 31242
+      },
+      {
+        "src": "/images/carousel/10-dansegulv-1440.webp",
+        "width": 960,
+        "height": 1440,
+        "bytes": 73320
+      }
+    ],
+    "href": "/galleri"
+  }
+]

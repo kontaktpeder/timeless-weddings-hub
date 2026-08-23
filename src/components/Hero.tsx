@@ -1,6 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import { site } from "../data/site";
-import heroImage from "../assets/images/hero/hero.jpg";
+import { heroImage, smallestVariant, srcSet } from "../data/images";
+
+const heroSrc = smallestVariant(heroImage.files);
 
 export function Hero() {
   return (
@@ -60,14 +62,15 @@ export function Hero() {
             className="absolute -top-6 -right-4 hidden h-full w-full rounded-3xl border border-brown/25 md:block"
           />
           <img
-            src={heroImage}
-            alt="Brudepar i en varm klem i gyllent kveldslys på Sørlandet"
-            width={1536}
-            height={1024}
+            src={heroSrc.src}
+            srcSet={srcSet(heroImage.files)}
+            sizes="(max-width: 768px) 100vw, 46vw"
+            alt={heroImage.alt}
+            width={heroSrc.width}
+            height={heroSrc.height}
             fetchPriority="high"
             decoding="async"
-            sizes="(max-width: 768px) 100vw, 46vw"
-            className="relative aspect-[3/2] w-full rounded-3xl object-cover shadow-warm"
+            className="relative aspect-[3/2] w-full rounded-3xl object-cover object-[center_42%] shadow-warm md:object-center"
           />
         </div>
       </div>

@@ -1,35 +1,56 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { galleryImages } from "../data/images";
 import { GalleryLightbox } from "./GalleryLightbox";
 
+const EAGER_COUNT = 6;
+
 /**
  * Samlet galleri — tett, organisk masonry-oppsett med blandede
- * vertikale og horisontale bilder. Bilder hentes automatisk fra
- * src/assets/images/ via src/data/images.ts.
+ * vertikale og horisontale bilder. Rekkefølge, stier og alt-tekst
+ * kommer fra gallery-manifest.json.
  */
 export function MasonryGallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const triggerRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const openedIndex = useRef<number | null>(null);
+
+  const open = (index: number) => {
+    openedIndex.current = index;
+    setLightboxIndex(index);
+  };
+
+  const close = () => {
+    const index = openedIndex.current;
+    setLightboxIndex(null);
+    queueMicrotask(() => {
+      if (index == null) return;
+      triggerRefs.current[index]?.focus();
+    });
+  };
 
   return (
     <>
-      <div className="columns-2 gap-2 sm:gap-2.5 lg:columns-3 xl:columns-4">
+      <div className="columns-2 gap-1.5 overflow-x-hidden md:columns-3 xl:columns-4 2xl:columns-5">
         {galleryImages.map((image, i) => (
           <button
-            key={image.src}
+            key={image.order}
+            ref={(node) => {
+              triggerRefs.current[i] = node;
+            }}
             type="button"
-            onClick={() => setLightboxIndex(i)}
+            onClick={() => open(i)}
             aria-label={`Åpne bilde i fullskjerm: ${image.alt}`}
-            className="group mb-2 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-md sm:mb-2.5"
+            className="group mb-1.5 block w-full cursor-pointer break-inside-avoid overflow-hidden rounded-[6px]"
           >
             <img
-              src={image.src}
+              src={image.thumb}
               alt={image.alt}
-              width={image.width}
-              height={image.height}
-              loading="lazy"
+              width={image.thumbWidth}
+              height={image.thumbHeight}
+              loading={i < EAGER_COUNT ? "eager" : "lazy"}
               decoding="async"
-              sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
-              className="w-full transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+              sizes="(max-width: 767px) 50vw, (max-width: 1279px) 33vw, (max-width: 1535px) 25vw, 20vw"
+              className="h-auto w-full"
             />
           </button>
         ))}
@@ -39,7 +60,7 @@ export function MasonryGallery() {
         <GalleryLightbox
           images={galleryImages}
           index={lightboxIndex}
-          onClose={() => setLightboxIndex(null)}
+          onClose={close}
           onNavigate={setLightboxIndex}
         />
       )}

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { carouselImages } from "../data/images";
+import { carouselImages, smallestVariant, srcSet } from "../data/images";
 
 /**
  * Sømløs, kontinuerlig bildekarusell.
@@ -28,9 +28,10 @@ export function InfiniteImageCarousel() {
           {doubled.map((image, i) => {
             const isDuplicate = i >= half;
             const offset = i % 2 === 1;
+            const preview = smallestVariant(image.variants);
             return (
               <Link
-                key={`${image.src}-${i}`}
+                key={`${image.order}-${i}`}
                 to="/galleri"
                 aria-hidden={isDuplicate || undefined}
                 tabIndex={isDuplicate ? -1 : undefined}
@@ -40,11 +41,13 @@ export function InfiniteImageCarousel() {
                 }`}
               >
                 <img
-                  src={image.src}
+                  src={preview.src}
+                  srcSet={srcSet(image.variants)}
+                  sizes="(max-width: 640px) 10rem, (max-width: 768px) 14rem, 16rem"
                   alt={isDuplicate ? "" : image.alt}
-                  width={image.width}
-                  height={image.height}
-                  loading="lazy"
+                  width={preview.width}
+                  height={preview.height}
+                  loading={i < 4 ? "eager" : "lazy"}
                   decoding="async"
                   className="h-full w-full object-cover"
                 />

@@ -1,0 +1,18 @@
+{
+  "sourceFilename": "Simon_Myklebost-210.jpg",
+  "alt": "Brudepar går hånd i hånd på en landvei.",
+  "files": [
+    {
+      "src": "/images/hero/simon-myklebost-hero-1280.webp",
+      "width": 1280,
+      "height": 853,
+      "bytes": 171022
+    },
+    {
+      "src": "/images/hero/simon-myklebost-hero-2560.webp",
+      "width": 2560,
+      "height": 1707,
+      "bytes": 693292
+    }
+  ]
+}
