@@ -106,61 +106,42 @@
 }
 
 @layer components {
+  /* Alle knapper rendres som ren tekst med underline ved hover */
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 2.75rem;
-    padding: 0.8rem 1.9rem;
-    border-radius: 9999px;
+    display: inline;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
     font-size: 0.9375rem;
     font-weight: 500;
     letter-spacing: 0.01em;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
     cursor: pointer;
-    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    transition: text-decoration-color 0.25s ease, color 0.25s ease;
+  }
+  .btn:hover {
+    text-decoration-color: currentColor;
   }
 
-  .btn-primary {
-    background-color: var(--brown);
-    color: var(--on-dark);
-  }
-  .btn-primary:hover {
-    background-color: var(--brown-deep);
-    transform: translateY(-1px);
-    box-shadow: 0 14px 30px -16px color-mix(in oklab, var(--brown-deep) 55%, transparent);
-  }
-
+  .btn-primary,
   .btn-outline {
-    border: 1px solid color-mix(in oklab, var(--brown) 45%, transparent);
     color: var(--brown-deep);
-    background-color: transparent;
   }
+  .btn-primary:hover,
   .btn-outline:hover {
-    background-color: color-mix(in oklab, var(--brown) 8%, transparent);
-    border-color: color-mix(in oklab, var(--brown) 65%, transparent);
-    transform: translateY(-1px);
+    color: var(--brown);
   }
 
-  .btn-light {
-    background-color: var(--on-dark);
-    color: var(--brown-deep);
-  }
-  .btn-light:hover {
-    background-color: var(--cream);
-    transform: translateY(-1px);
-    box-shadow: 0 14px 30px -16px rgb(0 0 0 / 0.35);
-  }
-
+  .btn-light,
   .btn-outline-light {
-    border: 1px solid color-mix(in oklab, var(--on-dark) 40%, transparent);
     color: var(--on-dark);
-    background-color: transparent;
   }
+  .btn-light:hover,
   .btn-outline-light:hover {
-    border-color: color-mix(in oklab, var(--on-dark) 70%, transparent);
-    background-color: color-mix(in oklab, var(--on-dark) 8%, transparent);
+    color: var(--cream);
   }
 
   /* Tynn rustikk linjedetalj */
