@@ -14,12 +14,14 @@ function assetJsonPlugin() {
         // Sørg for at Vite kjenner igjen filtypen og ikke prøver å resolve den som en vanlig modul
         return id;
       }
+      return null;
     },
     load(id: string) {
       if (id.endsWith(".asset.json") && fs.existsSync(id)) {
         const content = fs.readFileSync(id, "utf-8");
         return `export default ${content};`;
       }
+      return null;
     },
   };
 }
