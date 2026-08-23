@@ -42,7 +42,7 @@ export function Footer() {
 
       <div className="border-t border-on-dark/15">
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-6 text-xs text-on-dark/50 md:flex-row md:items-center md:justify-between md:px-8">
-          <p>© {new Date().getFullYear()} {site.name}</p>
+          <p>© {new Date().getFullYear()} studioPAH</p>
           <p>
             Nettside levert av{" "}
             <a
@@ -51,7 +51,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
             >
-              PAHstudio
+              studioPAH
             </a>
           </p>
         </div>
