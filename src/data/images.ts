@@ -80,9 +80,12 @@ export const galleryImages: GalleryImage[] = (() => {
   const max = Math.max(vertical.length, horizontal.length);
   for (let i = 0; i < max; i++) {
     // To vertikale per horisontale gir jevn fordeling i kolonnene
-    if (vertical[i * 2]) merged.push(vertical[i * 2]);
-    if (vertical[i * 2 + 1]) merged.push(vertical[i * 2 + 1]);
-    if (horizontal[i]) merged.push(horizontal[i]);
+    const v1 = vertical[i * 2];
+    const v2 = vertical[i * 2 + 1];
+    const h = horizontal[i];
+    if (v1) merged.push(v1);
+    if (v2) merged.push(v2);
+    if (h) merged.push(h);
   }
   return merged;
 })();
