@@ -41,9 +41,19 @@ export function Footer() {
       </div>
 
       <div className="border-t border-on-dark/15">
-        <div className="mx-auto flex max-w-6xl flex-col gap-1 px-5 py-6 text-xs text-on-dark/50 md:flex-row md:items-center md:justify-between md:px-8">
+        <div className="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-6 text-xs text-on-dark/50 md:flex-row md:items-center md:justify-between md:px-8">
           <p>© {new Date().getFullYear()} {site.name}</p>
-          <p>Bryllupsfotograf Sørlandet · Kristiansand · Oslo</p>
+          <p>
+            Nettside levert av{" "}
+            <a
+              href="https://pahstudio.no"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-4 transition-colors hover:text-on-dark hover:underline"
+            >
+              PAHstudio
+            </a>
+          </p>
         </div>
       </div>
     </footer>
