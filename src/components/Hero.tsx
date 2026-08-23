@@ -11,6 +11,35 @@ export function Hero() {
           <h1 className="mt-5 text-5xl text-brown-deep md:text-7xl">
             {site.name}
           </h1>
+          <nav aria-label="Hovednavigasjon" className="mt-6">
+            <ul className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.85rem] font-medium tracking-wide text-brown-deep/75">
+              <li>
+                <Link to="/galleri" className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline">
+                  Galleri
+                </Link>
+              </li>
+              <li>
+                <a href="#om-simon" className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline">
+                  Om Simon
+                </a>
+              </li>
+              <li>
+                <a href="#heldag" className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline">
+                  Heldag
+                </a>
+              </li>
+              <li>
+                <a href="#tilbakemeldinger" className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline">
+                  Tilbakemeldinger
+                </a>
+              </li>
+              <li>
+                <a href="#kontakt" className="underline-offset-4 transition-colors hover:text-brown-deep hover:underline">
+                  Kontakt
+                </a>
+              </li>
+            </ul>
+          </nav>
           <p className="mt-6 text-lg leading-relaxed text-brown-deep/80 md:text-xl">
             Bryllupsbilder med ro, varme og full kontroll – så dere kan være
             til stede i dagen.
