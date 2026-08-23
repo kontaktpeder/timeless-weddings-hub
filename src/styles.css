@@ -160,6 +160,10 @@
   }
 }
 
+@utility drop-shadow-soft {
+  text-shadow: 0 2px 14px color-mix(in oklab, var(--brown-deep) 55%, transparent);
+}
+
 /* Sømløs bildekarusell — ren CSS-animasjon, lav CPU-last */
 @keyframes marquee {
   from {
