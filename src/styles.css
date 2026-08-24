@@ -291,6 +291,7 @@
   .reveal.is-in {
     opacity: 1;
     transform: none;
+    filter: none;
     transition: none;
   }
   .reveal-media img,

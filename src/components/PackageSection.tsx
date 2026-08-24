@@ -5,8 +5,8 @@ import { Reveal } from "./Reveal";
 export function PackageSection() {
   return (
     <section id="heldag" className="relative scroll-mt-24 bg-brown text-on-dark">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background to-transparent" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" aria-hidden="true" />
+      <div className="section-fade-down pointer-events-none absolute inset-x-0 top-0 h-14 md:h-16" aria-hidden="true" />
+      <div className="section-fade-up pointer-events-none absolute inset-x-0 bottom-0 h-14 md:h-16" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-6xl gap-12 px-5 py-16 md:grid-cols-[0.9fr_1.1fr] md:gap-16 md:px-8 md:py-28">
         <Reveal>
           <p className="text-xs font-medium uppercase tracking-[0.18em] text-on-dark/60">
