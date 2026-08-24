@@ -1,9 +1,10 @@
 import { site } from "../data/site";
+import { Reveal } from "./Reveal";
 
 export function ContactCTA() {
   return (
     <section id="kontakt" className="scroll-mt-24">
-      <div className="mx-auto max-w-3xl px-5 py-16 text-center md:py-28">
+      <Reveal className="mx-auto max-w-3xl px-5 py-16 text-center md:py-28">
         <p className="overline-label">Kontakt</p>
         <h2 className="mt-4 text-3xl text-brown-deep md:text-5xl">
           Skal vi ta en uforpliktende prat?
@@ -44,7 +45,7 @@ export function ContactCTA() {
             Instagram {site.instagramHandle}
           </a>
         </address>
-      </div>
+      </Reveal>
     </section>
   );
 }

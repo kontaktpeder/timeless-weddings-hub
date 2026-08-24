@@ -1,4 +1,5 @@
 import { testimonials } from "../data/testimonials";
+import { Reveal } from "./Reveal";
 
 /**
  * Kundeuttalelser. Innholdet ligger i src/data/testimonials.ts og
@@ -9,17 +10,19 @@ export function Testimonials() {
   return (
     <section id="tilbakemeldinger" className="scroll-mt-24 border-y border-border bg-cream/60">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
-        <div className="max-w-xl">
+        <Reveal className="max-w-xl">
           <p className="overline-label">Tilbakemeldinger</p>
           <h2 className="mt-4 text-3xl text-brown-deep md:text-4xl">
             Ord fra brudepar
           </h2>
-        </div>
+        </Reveal>
 
         <ul className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:snap-none md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {testimonials.map((t, i) => (
-            <li
+            <Reveal
+              as="li"
               key={`${t.names}-${i}`}
+              delayMs={i * 80}
               className="flex w-[85vw] max-w-sm shrink-0 snap-center flex-col rounded-2xl border border-border bg-card p-7 shadow-warm md:w-auto md:max-w-none"
             >
               <svg
@@ -43,7 +46,7 @@ export function Testimonials() {
                 <p className="text-sm font-medium text-brown-deep">{t.names}</p>
                 <p className="mt-0.5 text-xs text-brown-deep/60">{t.date}</p>
               </footer>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>

@@ -164,7 +164,7 @@
   text-shadow: 0 2px 14px color-mix(in oklab, var(--brown-deep) 55%, transparent);
 }
 
-/* Sømløs bildekarusell — ren CSS-animasjon, lav CPU-last */
+/* Sømløs karusell — alltid i bevegelse, også ved touch/hover */
 @keyframes marquee {
   from {
     transform: translate3d(0, 0, 0);
@@ -176,21 +176,26 @@
 
 .marquee {
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .marquee-track {
   display: flex;
-  align-items: center;
-  gap: 0;
   width: max-content;
-  animation: marquee 45s linear infinite;
-  will-change: transform;
+  animation: marquee 36s linear infinite;
+  animation-play-state: running;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-.marquee:hover .marquee-track,
-.marquee:focus-within .marquee-track,
-.marquee:active .marquee-track {
-  animation-play-state: paused;
+.marquee-group {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .marquee-track {
+    animation-duration: 48s;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -202,7 +207,37 @@
   .marquee-track {
     animation: none;
   }
-  .marquee-track > * {
+  .marquee-group > * {
     scroll-snap-align: center;
+  }
+}
+
+/* Scroll-inngang */
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, 1.15rem, 0);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 767px) {
+  .reveal {
+    transform: translate3d(0, 0.7rem, 0);
+    transition-duration: 0.7s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

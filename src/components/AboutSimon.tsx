@@ -1,23 +1,26 @@
 import portrait from "../assets/images/simon/portrait.jpg";
+import { Reveal } from "./Reveal";
 
 export function AboutSimon() {
   return (
     <section id="om-simon" className="scroll-mt-24">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-[0.85fr_1fr] md:gap-16 md:px-8 md:py-24">
-        <div className="relative mx-auto w-full max-w-sm md:max-w-none">
-          <img
-            src={portrait}
-            alt="Portrett av bryllupsfotograf Simon Myklebost med kameraet sitt"
-            width={1024}
-            height={1280}
-            loading="lazy"
-            decoding="async"
-            sizes="(max-width: 768px) 90vw, 38vw"
-            className="aspect-[4/5] w-full rounded-3xl object-cover shadow-warm"
-          />
-        </div>
+        <Reveal>
+          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
+            <img
+              src={portrait}
+              alt="Portrett av bryllupsfotograf Simon Myklebost med kameraet sitt"
+              width={1024}
+              height={1280}
+              loading="lazy"
+              decoding="async"
+              sizes="(max-width: 768px) 90vw, 38vw"
+              className="aspect-[4/5] w-full rounded-3xl object-cover shadow-warm"
+            />
+          </div>
+        </Reveal>
 
-        <div className="max-w-xl">
+        <Reveal delayMs={90} className="max-w-xl">
           <p className="overline-label">Om Simon</p>
           <h2 className="mt-4 text-3xl text-brown-deep md:text-5xl">
             Hei, jeg heter Simon.
@@ -33,7 +36,7 @@ export function AboutSimon() {
             en kopp kaffe. Da går vi gjennom planen, ønskene deres og alt dere
             lurer på – slik at dere kan være helt rolige når dagen kommer.
           </p>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

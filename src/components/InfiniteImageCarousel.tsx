@@ -1,64 +1,67 @@
 import { Link } from "@tanstack/react-router";
-import { carouselImages, smallestVariant, srcSet } from "../data/images";
+import { carouselImages, smallestVariant } from "../data/images";
+import { Reveal } from "./Reveal";
 
 /**
- * Sømløs, kontinuerlig bildekarusell.
- * Ren CSS-animasjon (transform på compositor-tråden), duplisert rekke
- * for en loop uten synlig hopp. Pauser ved hover/fokus/aktiv interaksjon,
- * og blir manuelt skrubbbar ved prefers-reduced-motion.
- * Alle bilder åpner det samlede galleriet på /galleri.
+ * Sømløs, kontinuerlig karusell.
+ * To like grupper animeres med CSS. Ingen pause ved hover/touch —
+ * på mobil ville :active ellers stoppe ruten. Alle 960-filer lastes
+ * eager slik at kortene aldri står tomme.
  */
-export function InfiniteImageCarousel() {
-  const doubled = [...carouselImages, ...carouselImages];
-  const half = carouselImages.length;
+function CarouselStrip({ duplicate }: { duplicate?: boolean }) {
+  return (
+    <div className="marquee-group" aria-hidden={duplicate || undefined}>
+      {carouselImages.map((image) => {
+        const preview = smallestVariant(image.variants);
+        return (
+          <Link
+            key={`${image.order}-${duplicate ? "b" : "a"}`}
+            to="/galleri"
+            tabIndex={duplicate ? -1 : undefined}
+            aria-label={duplicate ? undefined : `Se ${image.alt} i galleriet`}
+            className="relative block h-72 w-48 shrink-0 overflow-hidden bg-brown/20 sm:h-80 sm:w-56 md:h-96 md:w-64"
+          >
+            <img
+              src={preview.src}
+              alt={duplicate ? "" : image.alt}
+              width={preview.width}
+              height={preview.height}
+              loading="eager"
+              decoding="async"
+              draggable={false}
+              className="h-full w-full object-cover"
+            />
+          </Link>
+        );
+      })}
+    </div>
+  );
+}
 
+export function InfiniteImageCarousel() {
   return (
     <section aria-label="Utvalgte bryllupsbilder" className="py-16 md:py-24">
-      <div className="mx-auto mb-8 flex max-w-6xl items-end justify-between gap-6 px-5 md:px-8">
-        <div>
+      <div className="mx-auto mb-8 max-w-6xl px-5 md:px-8">
+        <Reveal>
           <p className="overline-label">Utvalgte øyeblikk</p>
           <h2 className="mt-3 text-3xl text-brown-deep md:text-4xl">
             Bilder fra virkelige dager
           </h2>
-        </div>
+        </Reveal>
       </div>
 
       <div className="marquee">
         <div className="marquee-track">
-          {doubled.map((image, i) => {
-            const isDuplicate = i >= half;
-            const preview = smallestVariant(image.variants);
-            return (
-              <Link
-                key={`${image.order}-${i}`}
-                to="/galleri"
-                aria-hidden={isDuplicate || undefined}
-                tabIndex={isDuplicate ? -1 : undefined}
-                aria-label={isDuplicate ? undefined : `Se ${image.alt} i galleriet`}
-                className="group relative block h-64 w-44 shrink-0 overflow-hidden sm:h-80 sm:w-56 md:h-96 md:w-64"
-              >
-                <img
-                  src={preview.src}
-                  srcSet={srcSet(image.variants)}
-                  sizes="(max-width: 640px) 11rem, (max-width: 768px) 14rem, 16rem"
-                  alt={isDuplicate ? "" : image.alt}
-                  width={preview.width}
-                  height={preview.height}
-                  loading={i < 4 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="h-full w-full object-cover"
-                />
-              </Link>
-            );
-          })}
+          <CarouselStrip />
+          <CarouselStrip duplicate />
         </div>
       </div>
 
-      <div className="mt-10 text-center">
+      <Reveal className="mt-10 text-center" delayMs={80}>
         <Link to="/galleri" className="btn btn-outline">
           Se hele galleriet
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }

@@ -1,7 +1,9 @@
+import { Reveal } from "./Reveal";
+
 export function TrustIntro() {
   return (
     <section className="border-y border-border bg-cream/60">
-      <div className="mx-auto max-w-3xl px-5 py-16 text-center md:py-24">
+      <Reveal className="mx-auto max-w-3xl px-5 py-16 text-center md:py-24">
         <hr className="rule mx-auto mb-10 w-16" />
         <h2 className="text-3xl text-brown-deep md:text-[2.75rem] md:leading-snug">
           Dere skal være til stede. Jeg passer på resten.
@@ -28,7 +30,7 @@ export function TrustIntro() {
           </a>
         </div>
         <hr className="rule mx-auto mt-10 w-16" />
-      </div>
+      </Reveal>
     </section>
   );
 }
