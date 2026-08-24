@@ -26,11 +26,11 @@ export function Hero() {
           {/* Myk mørkning for lesbarhet */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-r from-brown-deep/55 via-brown-deep/25 to-brown-deep/45"
+            className="absolute inset-0 bg-gradient-to-r from-brown-deep/30 via-transparent to-brown-deep/20"
           />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-brown-deep/70 via-transparent to-brown-deep/20"
+            className="absolute inset-0 bg-gradient-to-t from-brown-deep/55 via-brown-deep/5 to-transparent"
           />
 
           {/* Innhold lagt over bildet */}
