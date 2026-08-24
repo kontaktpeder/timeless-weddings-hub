@@ -5,19 +5,17 @@ export function AboutSimon() {
   return (
     <section id="om-simon" className="scroll-mt-24">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-[0.85fr_1fr] md:gap-16 md:px-8 md:py-24">
-        <Reveal>
-          <div className="relative mx-auto w-full max-w-sm md:max-w-none">
-            <img
-              src={portrait}
-              alt="Portrett av bryllupsfotograf Simon Myklebost med kameraet sitt"
-              width={1024}
-              height={1280}
-              loading="lazy"
-              decoding="async"
-              sizes="(max-width: 768px) 90vw, 38vw"
-              className="aspect-[4/5] w-full rounded-3xl object-cover shadow-warm"
-            />
-          </div>
+        <Reveal variant="media" className="relative mx-auto w-full max-w-sm rounded-3xl md:max-w-none">
+          <img
+            src={portrait}
+            alt="Portrett av bryllupsfotograf Simon Myklebost med kameraet sitt"
+            width={1024}
+            height={1280}
+            loading="lazy"
+            decoding="async"
+            sizes="(max-width: 768px) 90vw, 38vw"
+            className="aspect-[4/5] w-full rounded-3xl object-cover shadow-warm"
+          />
         </Reveal>
 
         <Reveal delayMs={90} className="max-w-xl">

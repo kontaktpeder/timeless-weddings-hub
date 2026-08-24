@@ -164,61 +164,15 @@
   text-shadow: 0 2px 14px color-mix(in oklab, var(--brown-deep) 55%, transparent);
 }
 
-/* Sømløs karusell — alltid i bevegelse, også ved touch/hover */
-@keyframes marquee {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-  to {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.marquee {
-  overflow: hidden;
-  touch-action: pan-y;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 36s linear infinite;
-  animation-play-state: running;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-}
-
-.marquee-group {
-  display: flex;
-}
-
-@media (min-width: 768px) {
-  .marquee-track {
-    animation-duration: 48s;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
-  }
-  .marquee-track {
-    animation: none;
-  }
-  .marquee-group > * {
-    scroll-snap-align: center;
-  }
-}
+/* Karusell-bevegelse styres i JS (piksler) — CSS-nøkkelrammer brukes ikke her. */
 
 /* Scroll-inngang */
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 1.15rem, 0);
+  transform: translate3d(0, 2.75rem, 0);
   transition:
-    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 1.15s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.15s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.is-in {
@@ -226,10 +180,54 @@
   transform: none;
 }
 
+.reveal-media {
+  overflow: hidden;
+}
+
+.reveal-media img {
+  transform: scale(1.12);
+  transition: transform 1.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-media.is-in img {
+  transform: scale(1);
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.5rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-copy-in {
+  animation: hero-in 1.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-copy-in-late {
+  animation: hero-in 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
+}
+
+.hero-kenburns {
+  animation: hero-kenburns 18s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (max-width: 767px) {
   .reveal {
-    transform: translate3d(0, 0.7rem, 0);
-    transition-duration: 0.7s;
+    transform: translate3d(0, 2rem, 0);
   }
 }
 
@@ -239,5 +237,15 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .reveal-media img,
+  .reveal-media.is-in img {
+    transform: none;
+    transition: none;
+  }
+  .hero-copy-in,
+  .hero-copy-in-late,
+  .hero-kenburns {
+    animation: none;
   }
 }

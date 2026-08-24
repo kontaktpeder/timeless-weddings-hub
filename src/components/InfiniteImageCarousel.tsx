@@ -1,16 +1,21 @@
+import { useEffect, useRef, type Ref } from "react";
 import { Link } from "@tanstack/react-router";
 import { carouselImages, smallestVariant } from "../data/images";
 import { Reveal } from "./Reveal";
 
-/**
- * Sømløs, kontinuerlig karusell.
- * To like grupper animeres med CSS. Ingen pause ved hover/touch —
- * på mobil ville :active ellers stoppe ruten. Alle 960-filer lastes
- * eager slik at kortene aldri står tomme.
- */
-function CarouselStrip({ duplicate }: { duplicate?: boolean }) {
+function CarouselStrip({
+  groupRef,
+  duplicate,
+}: {
+  groupRef?: Ref<HTMLDivElement>;
+  duplicate?: boolean;
+}) {
   return (
-    <div className="marquee-group" aria-hidden={duplicate || undefined}>
+    <div
+      ref={groupRef}
+      className="flex shrink-0"
+      aria-hidden={duplicate || undefined}
+    >
       {carouselImages.map((image) => {
         const preview = smallestVariant(image.variants);
         return (
@@ -38,7 +43,43 @@ function CarouselStrip({ duplicate }: { duplicate?: boolean }) {
   );
 }
 
+/**
+ * Kontinuerlig karusell drevet i piksler (ikke CSS -50%).
+ * iOS Safari tolker prosent-transform mot viewport, så ruten sto stille på mobil.
+ */
 export function InfiniteImageCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const groupRef = useRef<HTMLDivElement>(null);
+  const offsetRef = useRef(0);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    const group = groupRef.current;
+    if (!track || !group) return;
+
+    let frame = 0;
+    let last = performance.now();
+
+    const tick = (now: number) => {
+      const dt = Math.min(48, now - last);
+      last = now;
+      const width = group.getBoundingClientRect().width;
+      const mobile = window.matchMedia("(max-width: 767px)").matches;
+      const speed = mobile ? 58 : 44;
+
+      if (width > 1) {
+        offsetRef.current += (speed * dt) / 1000;
+        if (offsetRef.current >= width) offsetRef.current -= width;
+        track.style.transform = `translate3d(${-offsetRef.current}px,0,0)`;
+      }
+
+      frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <section aria-label="Utvalgte bryllupsbilder" className="py-16 md:py-24">
       <div className="mx-auto mb-8 max-w-6xl px-5 md:px-8">
@@ -50,14 +91,14 @@ export function InfiniteImageCarousel() {
         </Reveal>
       </div>
 
-      <div className="marquee">
-        <div className="marquee-track">
-          <CarouselStrip />
+      <div className="overflow-hidden touch-pan-y">
+        <div ref={trackRef} className="flex w-max will-change-transform">
+          <CarouselStrip groupRef={groupRef} />
           <CarouselStrip duplicate />
         </div>
       </div>
 
-      <Reveal className="mt-10 text-center" delayMs={80}>
+      <Reveal className="mt-10 text-center" delayMs={120}>
         <Link to="/galleri" className="btn btn-outline">
           Se hele galleriet
         </Link>

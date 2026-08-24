@@ -1,20 +1,24 @@
 import { useEffect, useRef, useState, type CSSProperties, type ElementType, type ReactNode } from "react";
 import { cn } from "../lib/utils";
 
+type RevealVariant = "copy" | "media";
+
 /**
- * Rolig inngang når seksjonen kommer inn i bildet.
- * Respekterer prefers-reduced-motion. Innholdet er synlig uten JS via noscript.
+ * Inngang når elementet kommer inn i bildet.
+ * To rAF-rammer sikrer at CSS-overgangen faktisk spilles av.
  */
 export function Reveal({
   children,
   className,
   delayMs = 0,
   as: Tag = "div",
+  variant = "copy",
 }: {
   children: ReactNode;
   className?: string;
   delayMs?: number;
   as?: "div" | "li";
+  variant?: RevealVariant;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -22,6 +26,12 @@ export function Reveal({
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+
+    const show = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setVisible(true));
+      });
+    };
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setVisible(true);
@@ -31,11 +41,11 @@ export function Reveal({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry?.isIntersecting) {
-          setVisible(true);
+          show();
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+      { threshold: 0.08, rootMargin: "0px 0px -12% 0px" },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -50,7 +60,12 @@ export function Reveal({
   return (
     <Component
       ref={ref}
-      className={cn("reveal", visible && "is-in", className)}
+      className={cn(
+        "reveal",
+        variant === "media" && "reveal-media",
+        visible && "is-in",
+        className,
+      )}
       style={style}
     >
       {children}
