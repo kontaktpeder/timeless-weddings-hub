@@ -3,7 +3,7 @@ import { site } from "../data/site";
 export function Footer() {
   return (
     <footer className="relative bg-brown-deep text-on-dark">
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-brown-deep" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-10 bg-gradient-to-b from-background via-background/90 to-brown-deep" aria-hidden="true" />
       <div className="relative mx-auto flex max-w-4xl flex-col items-center px-5 py-24 text-center md:py-32">
         <p className="font-display text-3xl md:text-5xl">{site.name}</p>
         <p className="mt-4 max-w-md text-base leading-relaxed text-on-dark/75 md:text-lg">
