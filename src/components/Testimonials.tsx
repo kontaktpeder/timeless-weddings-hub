@@ -8,7 +8,7 @@ import { Reveal } from "./Reveal";
  */
 export function Testimonials() {
   return (
-    <section id="tilbakemeldinger" className="scroll-mt-24 border-y border-border bg-cream/60">
+    <section id="tilbakemeldinger" className="scroll-mt-24 bg-gradient-to-b from-cream/0 via-cream/60 to-cream/0">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-24">
         <Reveal className="max-w-xl">
           <p className="overline-label">Tilbakemeldinger</p>
@@ -42,7 +42,7 @@ export function Testimonials() {
               <blockquote className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-brown-deep/80">
                 {t.quote}
               </blockquote>
-              <footer className="mt-6 border-t border-border pt-4">
+              <footer className="mt-6 pt-4">
                 <p className="text-sm font-medium text-brown-deep">{t.names}</p>
                 <p className="mt-0.5 text-xs text-brown-deep/60">{t.date}</p>
               </footer>

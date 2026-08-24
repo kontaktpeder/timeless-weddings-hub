@@ -2,8 +2,9 @@ import { site } from "../data/site";
 
 export function Footer() {
   return (
-    <footer className="bg-brown-deep text-on-dark">
-      <div className="mx-auto flex max-w-4xl flex-col items-center px-5 py-24 text-center md:py-32">
+    <footer className="relative bg-brown-deep text-on-dark">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-background to-brown-deep" aria-hidden="true" />
+      <div className="relative mx-auto flex max-w-4xl flex-col items-center px-5 py-24 text-center md:py-32">
         <p className="font-display text-3xl md:text-5xl">{site.name}</p>
         <p className="mt-4 max-w-md text-base leading-relaxed text-on-dark/75 md:text-lg">
           Bryllupsfotograf på Sørlandet og i Oslo. Bilder med ro, varme og full
@@ -40,7 +41,7 @@ export function Footer() {
         </ul>
       </div>
 
-      <div className="border-t border-on-dark/15">
+      <div>
         <div className="mx-auto flex max-w-6xl items-center justify-center px-5 py-6 text-xs text-on-dark/50 md:px-8">
           <p>
             Nettside levert av{" "}
